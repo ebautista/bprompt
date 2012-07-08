@@ -79,6 +79,12 @@
     		<!-- Wala pa ung mga fields nito ^_^ -->
     	</id>
     </class>
+    <class name="TaxExemption" table="TAX_EXEMPTION">
+    	<id name="id" type="long">
+    		<generator class="identity"/>
+    		<!-- Wala pa ung mga fields nito ^_^ -->
+    	</id>
+    </class>
     <class name="EmployeeDepartment" table="EMPLOYEE_DEPARTMENT">
     	<id name="id" type="long">
     		<generator class="identity"/>
