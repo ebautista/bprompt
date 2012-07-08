@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+								   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="ph.com.bprompt.datasource.admin.model">
+    <!-- CLASS DEFINITIONS -->
+    <class name="Employee" table="EMPLOYEES">
+        <id name="id" type="long">
+            <generator class="identity" />
+        </id>
+        <property name="lastName" type="string"/>
+        <property name="firstName" type="string"/>
+        <property name="middleName" type="string"/>
+        
+        <property name="dateHired" type="date"/>
+        <property name="dateResigned" type="date"/>
+        <property name="dateOfBirth" type="date"/>
+        
+        <property name="externalId" type="string"/>
+        
+        <property name="gender" type="character"/>
+        <property name="civilStatus" type="character"/>
+        
+        <property name="tinNumber" column="tin" type="string"/>
+        
+        <set name="employeeContact" table="EMPLOYEE_CONTACTS" lazy="false" 
+        	inverse="true" cascade="all-delete-orphan">
+        	<key column="employee_id"/>
+        	<one-to-many class="EmployeeContact"/>
+        </set>
+        <set name="employeeDepartment" table="EMPLOYEE_DEPARTMENT" lazy="false" 
+        	inverse="true" cascade="all-delete-orphan" order-by="fromDate DESC">
+        	<key column="employee_id"/>
+        	<one-to-many class="EmployeeDepartment"/>	
+        </set>
+        <set name="employeeContribution" table="EMPLOYEE_CONTRIBUTION" lazy="false" 
+        	inverse="true" cascade="all-delete-orphan">
+        	<key column="employee_id"/>
+        	<one-to-many class="EmployeeContribution"/>	
+        </set>
+        <set name="employeeSalary" table="EMPLOYEE_SALARY" lazy="false" 
+        	inverse="true" cascade="all-delete-orphan" order-by="fromDate DESC">
+        	<key column="employee_id"/>
+        	<one-to-many class="EmployeeSalary"/>	
+        </set>
+        <set name="employeeTaxExemption" table="EMPLOYEE_TAX_EXEMPTION" lazy="false" 
+        	inverse="true" cascade="all-delete-orphan" order-by="fromDate DESC">
+        	<key column="employee_id"/>
+        	<one-to-many class="EmployeeTaxExemption"/>	
+        </set>
+        <set name="employeePosition" table="EMPLOYEE_POSITION" lazy="false" 
+        	inverse="true" cascade="all-delete-orphan" order-by="fromDate DESC">
+        	<key column="employee_id"/>
+        	<one-to-many class="EmployeePosition"/>	
+        </set>
+        <set name="employeeFixAdjustment" table="EMPLOYEE_FIX_ADJUSTMENT" lazy="false" 
+        	inverse="true" cascade="all-delete-orphan">
+        	<key column="employee_id"/>
+        	<one-to-many class="EmployeeFixAdjustment"/>	
+        </set>
+    </class>
+    <class name="Department" table="DEPARTMENTS">
+        <id name="id" type="long">
+            <generator class="identity" />
+        </id>
+        <property name="name" type="string" not-null="true"/>
+        <property name="description" type="string"/>
+        <many-to-one name="parent" class="Department"/>
+    </class>
+    <class name="Contribution" table="CONTRIBUTION">
+    	<id name="id" type="long">
+    		<generator class="identity"/>
+    		<!-- Wala pa ung mga fields nito ^_^ -->
+    	</id>
+    </class>
+    <class name="SalaryType" table="SALARY_TYPE">
+    	<id name="id" type="long">
+    		<generator class="identity"/>
+    		<!-- Wala pa ung mga fields nito ^_^ -->
+    	</id>
+    </class>
+    <class name="EmployeeDepartment" table="EMPLOYEE_DEPARTMENT">
+    	<id name="id" type="long">
+    		<generator class="identity"/>
+    	</id>
+    	<many-to-one name="employee" class="Employee" column="employee_id" fetch="join" lazy="false"/>
+    	<many-to-one name="department" class="Department" column="department_id" fetch="join" lazy="false"/>
+    	<property name="fromDate" type="date" not-null="true"/>
+    	<property name="untilDate" type="date"/>
+    </class>
+    <class name="EmployeeContact" table="EMPLOYEE_CONTACTS">
+    	<id name="id" type="long">
+            <generator class="identity"/>
+        </id>
+        <many-to-one name="employee" class="Employee" column="employee_id" fetch="join" lazy="false"/>
+        <many-to-one name="type" class="ph.com.bprompt.datasource.common.model.BusinessCode" fetch="join" lazy="false"/>
+        <property name="details" type="string"/>
+    </class>
+    <class name="EmployeeContribution" table="EMPLOYEE_CONTRIBUTION">
+    	<id name="id" type="long">
+    		<generator class="identity"/>
+    	</id>
+    	<many-to-one name="employee" class="Employee" column="employee_id" fetch="join" lazy="false"/>
+    	<many-to-one name="contribution" class="Contribution" column="contribution_id" fetch="join" lazy="false"/>
+    	<property name="idNumber" type="string" not-null="true"/>
+    </class>
+    <class name="EmployeeSalary" table="EMPLOYEE_SALARY">
+    	<id name="id" type="long">
+    		<generator class="identity"/>
+    	</id>
+    	<many-to-one name="employee" class="Employee" column="employee_id" fetch="join" lazy="false"/>
+    	<many-to-one name="salaryType" class="SalaryType" column="salary_type_id" fetch="join" lazy="false"/>
+    	<property name="basicPay" type="double" not-null="true"/>
+    	<property name="fromDate" type="date" not-null="true"/>
+    	<property name="untilDate" type="date"/>
+    </class>
+    <class name="EmployeeTaxExemption" table="EMPLOYEE_TAX_EXEMPTION">
+    	<id name="id" type="long">
+    		<generator class="identity"/>
+    	</id>
+    	<many-to-one name="employee" class="Employee" column="employee_id" fetch="join" lazy="false"/>
+    	<many-to-one name="taxExemptionType" class="TaxExemption" column="tax_exemption_id" fetch="join" lazy="false"/>
+    	<property name="fromDate" type="date" not-null="true"/>
+    	<property name="untilDate" type="date"/>
+    </class>
+    <class name="EmployeePosition" table="EMPLOYEE_POSITION">
+    	<id name="id" type="long">
+    		<generator class="identity"/>
+    	</id>
+    	<many-to-one name="employee" class="Employee" column="employee_id" fetch="join" lazy="false"/>
+    	<many-to-one name="position" class="ph.com.bprompt.datasource.common.model.BusinessCode" column="position_id" fetch="join" lazy="false"/>
+    	<property name="fromDate" type="date" not-null="true"/>
+    	<property name="untilDate" type="date"/>
+    </class>
+    <class name="EmployeeFixAdjustment" table="EMPLOYEE_FIX_ADJUSTMENT">
+    	<id name="id" type="long">
+    		<generator class="identity"/>
+    	</id>
+    	<many-to-one name="employee" class="Employee" column="employee_id" fetch="join" lazy="false"/>
+    	<many-to-one name="adjustmentType" class="ph.com.bprompt.datasource.common.model.BusinessCode" column="adjustment_type_id" fetch="join" lazy="false"/>
+    	<property name="amount" type="double" not-null="true"/>
+    	<property name="daysOfMonth" type="integer" not-null="true"/>
+    	<property name="active" type="boolean"/>
+    </class>
+    <!-- END OF CLASS DEFINITIONS -->
+    
+    <!-- QUERY DEFINITIONS -->
+    <query name="departments">
+    	FROM Department
+    	ORDER BY name ASC
+    </query>
+    <!-- END OF QUERY DEFINITIONS -->
+</hibernate-mapping>
