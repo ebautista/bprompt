@@ -1,7 +1,13 @@
 package ph.com.bprompt.datasource.admin.model;
 
+import javax.persistence.Table;
+
+import org.hibernate.annotations.Entity;
+
 import ph.com.bprompt.datasource.common.model.AbstractModel;
 
+@Entity
+@Table(name="Department")
 public class Department extends AbstractModel<Long> {
 	
 	private static final long serialVersionUID = 6626837987001877525L;

@@ -119,6 +119,28 @@
 			<version>${spring.version}</version>
 			<scope>test</scope>
 		</dependency>
+		
+		<!-- FX TRY WITH GIN-->
+		<dependency>
+			<groupId>com.google.gwt.inject</groupId>
+			<artifactId>gin</artifactId>
+			<version>1.5.0</version>
+			<scope>runtime</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>com.google.gwt</groupId>
+					<artifactId>gwt-servlet</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.oracle</groupId>
+            <artifactId>javafx</artifactId>
+            <version>2.1</version>
+            <systemPath>C:/Program Files/Oracle/JavaFX 2.1 SDK/rt/lib/jfxrt.jar</systemPath>
+            <scope>system</scope>
+		</dependency>
+		<!-- FX TRY WITH GIN-->
 	</dependencies>
 
 	<build>
