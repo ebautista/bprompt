@@ -21,7 +21,6 @@ public class DepartmentDaoImpl extends GenericDaoImpl<Department, Long> implemen
 
 	@Override
 	public List<Department> search() {
-		// TODO Auto-generated method stub
-		return null;
+		return retrieveList("departments", null, null);
 	}
 }
