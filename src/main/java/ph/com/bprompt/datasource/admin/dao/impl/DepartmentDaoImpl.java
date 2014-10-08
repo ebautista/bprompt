@@ -9,13 +9,19 @@ import ph.com.bprompt.datasource.admin.model.Department;
 import ph.com.bprompt.datasource.common.dao.impl.GenericDaoImpl;
 
 public class DepartmentDaoImpl extends GenericDaoImpl<Department, Long> implements DepartmentSearchDao {
-	
+
+	/**
+	 * Constructor
+	 * 
+	 * @param sessionFactory
+	 */
 	public DepartmentDaoImpl(SessionFactory sessionFactory) {
 		super(sessionFactory, Department.class);
 	}
 
 	@Override
 	public List<Department> search() {
-		return retrieveList("departments", null, null);
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

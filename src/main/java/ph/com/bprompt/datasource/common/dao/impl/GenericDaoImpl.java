@@ -7,25 +7,22 @@ import org.hibernate.SessionFactory;
 import ph.com.bprompt.datasource.common.dao.AbstractDao;
 import ph.com.bprompt.datasource.common.dao.GenericDao;
 
-/**
- * This concrete class defines the default implementation of CRUD
- * operations. All DAO classes which will use CRUD operations should
- * extend this class.
- * 
- * @author Edwin Bautista
- *
- * @param <T> - The domain model for the instance of the DAO.
- * @param <PK> - The primary key of the domain model.
- */
 @SuppressWarnings("unchecked")
 public class GenericDaoImpl<T, PK extends Serializable> extends AbstractDao implements GenericDao<T, PK> {
 	
 	private final Class<T> type;
 	
+	/**
+	 * Constructor
+	 * 
+	 * @param sessionFactory
+	 * @param type
+	 */
 	public GenericDaoImpl(SessionFactory sessionFactory, Class<T> type) {
 		super(sessionFactory);
 		this.type = type;
 	}
+	
 	
 	@Override
 	public PK create(T newInstance) {
@@ -46,4 +43,5 @@ public class GenericDaoImpl<T, PK extends Serializable> extends AbstractDao impl
 	public void delete(PK identifier) {
 		getSession().delete(read(identifier));
 	}
+
 }

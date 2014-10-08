@@ -133,13 +133,13 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		<dependency>
+		<!-- <dependency>
 			<groupId>com.oracle</groupId>
             <artifactId>javafx</artifactId>
             <version>2.1</version>
-            <systemPath>C:/Program Files/Oracle/JavaFX 2.1 SDK/rt/lib/jfxrt.jar</systemPath>
+            <systemPath>C:/Program Files/Java/jdk1.8.0_20/jre/lib/ext/jfxrt.jar</systemPath>
             <scope>system</scope>
-		</dependency>
+		</dependency> -->
 		<!-- FX TRY WITH GIN-->
 	</dependencies>
 

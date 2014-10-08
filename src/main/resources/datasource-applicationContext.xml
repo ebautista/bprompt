@@ -34,14 +34,14 @@
     </bean>
     <bean id="genericDao" abstract="true" parent="abstractDao" class="ph.com.bprompt.datasource.common.dao.impl.GenericDaoImpl"/>
     <bean id="departmentDao" parent="genericDao" class="ph.com.bprompt.datasource.admin.dao.impl.DepartmentDaoImpl"/>
-    <bean id="logEntryDao" parent="abstractDao" class="ph.com.bprompt.datasource.common.dao.impl.LogEntryDaoImpl"/>
+    <!-- <bean id="logEntryDao" parent="abstractDao" class="ph.com.bprompt.datasource.common.dao.impl.LogEntryDaoImpl"/> -->
     <!-- END OF DAO Layer -->
     
     <!-- Service Layer -->
-    <bean id="genericService" abstract="true" class="ph.com.bprompt.datasource.common.service.impl.GenericServiceImpl"/>
+    <!-- <bean id="genericService" abstract="true" class="ph.com.bprompt.datasource.common.service.impl.GenericServiceImpl"/>
     <bean id="departmentService" class="ph.com.bprompt.datasource.admin.service.impl.DepartmentServiceImpl">
     	<constructor-arg ref="departmentDao" index="0"/>
     	<constructor-arg ref="departmentDao" index="1"/>
-    </bean>
+    </bean> -->
     <!-- END OF Service Layer -->
 </beans>
